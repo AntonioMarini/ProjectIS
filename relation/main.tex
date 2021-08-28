@@ -174,8 +174,67 @@
 
 \section{Architettura in vista C\&C e dislocazione.}
 
+\subsection{Vista C\&C}
+
 \includegraphics[max size={\textwidth}{\textheight}]{images/compomponentdiagram.png}
 
+\subsection{Diagramma di dislocazione}
+
+\includegraphics[max size={\textwidth}{\textheight}]{images/dislocazione.png}
+
+\newpage
+
 \section{Test obbligations}
+\lstset{style=bashstyle}
+
+\begin{lstlisting}[language=java]
+    public boolean assegnaFoto(
+        List<Fotografia> fotografie, 
+        List<Giudice> giudici, 
+        int numGiudiciPerFoto){
+
+        if(fotografie != null || giudici != null)
+            return false;
+        if(numGiudiciPerFoto <= 1)
+            return false;
+        if(giudici.size() <= 0)
+            return false;
+        if(giudici.size() <= numGiudiciPerFoto)
+            return false;
+
+        for(Fotografia foto : fotografie){
+            for(int i = 0; i < numGiudici; i++){
+                foto.assegnaGiudice(giudici.getRandom());
+            }
+        }
+
+        return true;
+    }
+\end{lstlisting}
+\hfill
+
+\begin{center}
+    \begin{tabular}{ |c|c|c|c|c| }
+        \hline
+        \textbf{numFotografie}     &
+        \textbf{numGiudici}        &
+        \textbf{numGiudiciPerFoto} &
+        \textbf{Output}            &
+        \textbf{Giustificazione}                                                                 \\
+        \hline
+        0                          & 10 & 3 & true  & Il test è andato a buon fine.              \\
+        \hline
+        6                          & 15 & 3 & true  & Il test è andato a buon fine.              \\
+        \hline
+        2                          & 15 & 1 & false & Il numero di  giudici per foto è $\leq 1$. \\
+        \hline
+        7                          & 0  & 5 & false & Il numero di  giudici è $\leq 0$.          \\
+        \hline
+        11                         & 2  & 3 & false & Il numero di  giudici è $\leq$             \\
+                                   &    &   &       & del numero di giudici per foto.            \\
+        \hline
+    \end{tabular}
+\end{center}
+
 
 \end{document}
