@@ -17,6 +17,7 @@
 \usepackage{graphicx}
 \usepackage[export]{adjustbox} 
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{imakeidx}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -73,7 +74,7 @@
     showtabs=false
 }
 
-\title{Ingegneria del Software - NomeProgetto}
+\title{Ingegneria del Software - Concorso di Foto}
 \author{
   Antonio Marini\\
   \texttt{559200}
@@ -88,9 +89,14 @@
   \texttt{580240}
 }
 
+\makeindex
 
 \begin{document}
+
 \maketitle
+\newpage
+
+\tableofcontents
 
 \newpage
 
@@ -114,8 +120,8 @@
         Sequenza principale degli eventi  &
         \begin{enumerate}
             \item Il responsabile richiede al sistema di creare un concorso
-            \item Il sistema chiede i requisiti delle foto e numero massimo di foto
             \item Il sistema chiede la data e il luogo in cui tenere l’evento
+            \item Il sistema chiede i requisiti delle foto e numero massimo di foto
             \item While(num giudici scelti $<$ $x$)
                   \begin{enumerate}
                       \item Mostra lista esperti disponibili ottenuta dal database degli esperti
@@ -128,7 +134,7 @@
         \begin{itemize}
             \item Almeno un tema scelto,
             \item Requisiti fotografie scelti.
-            \item Almeno $x$ giudici scelti.
+            \item Esattamente $x$ giudici scelti.
             \item Concorso creato con successo.
         \end{itemize}
         \\
@@ -203,7 +209,7 @@
             return false;
 
         for(Fotografia foto : fotografie){
-            for(int i = 0; i < numGiudici; i++){
+            for(int i = 0; i < numGiudiciPerFoto; i++){
                 foto.assegnaGiudice(giudici.getRandom());
             }
         }
